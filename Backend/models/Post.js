@@ -2,7 +2,9 @@ const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
 
-    caption:String,
+    caption: {
+        type: String,
+    },
 
     image: {
         public_id: String,

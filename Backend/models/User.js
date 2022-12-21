@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         minlength: [6, "Password must be at least 6 characters"],
     },
 
-    post: [
+    posts: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
@@ -59,13 +59,13 @@ userSchema.pre("save", async function(next) {
     next();
 });
 
-userSchema.method.matchPassword = async function(password) {
+userSchema.methods.matchPassword = async function(password) {
 
     return await bcrypt.compare(password, this.password);
 
 }
 
-userSchema.method.generateToken = async function() {
+userSchema.methods.generateToken = async function() {
 
     return jwt.sign({ id: this._id}, process.env.JWT_SECRET)
 
